@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> 상품 추천 pip install pandas
+    </title>
+    <style>
+        .photo-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .photo-grid-item {
+            margin: 10px;
+        }
+
+        .submit-button {
+            margin-top: 10px;
+            transform: scale(2); /* 크기를 3배로 조정 */
+        }
+
+        .checkbox-label {
+            transform: scale(4); /* 크기를 4배로 조정 */
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        .form-wrapper {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            var pageLoadTimeInput = document.getElementById('page_load_time');
+            var submissionTimeInput = document.getElementById('submission_time');
+            pageLoadTimeInput.value = new Date().toISOString();
+    
+            // 제출 버튼 클릭 시 현재 시각을 submission_time input에 설정
+            document.querySelector('form').addEventListener('submit', function() {
+                submissionTimeInput.value = new Date().toISOString();
+            });
+        }
+    </script>
+    
+    
+</head>
+<body>
+    <h1>상품 추천 </h1>
+    <form method="POST" action="/">
+
+        <input type="hidden" name="page_load_time" id="page_load_time" value="">
+
+
+        <div class="photo-grid">
+            {% for image_name in image_names %}
+                <div class="photo-grid-item">
+                    <img src="{{ url_for('static', filename='images/' + image_name) }}" width="300" height="300">
+                    <br>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="image_checkbox" value="{{ image_name }}">
+                    </label>
+                </div>
+                {% if loop.index % 10 == 0 %}
+                    <div style="clear: both;"></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="form-wrapper">
+            <input type="submit" value="제출" class="submit-button">
+            <input type="hidden" name="submission_time" id="submission_time" value="">
+
+        </div>
+    </form>
+</body>
+</html>

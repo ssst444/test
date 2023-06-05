@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>결과</title>
+</head>
+<body>
+    <h1>결과</h1>
+    <table>
+        <tr>
+            <th>사용자</th>
+            <th>선택한 사진</th>
+            <th>제출 시간</th>
+        </tr>
+        {% for result in results %}
+            <tr>
+                <td>{{ result[0] }}</td>
+                <td>{{ result[1] }}</td>
+                <td>{{ result[2] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
